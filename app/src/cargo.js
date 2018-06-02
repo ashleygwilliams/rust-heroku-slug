@@ -50,9 +50,10 @@ async function cargo(tar, options = {}) {
   await exec(joinCmd(args));
 
   try {
-    let args = [cargoCmd, "build"];
+    let args = [cargoCmd, "rustc"];
     args.push('--manifest-path=' + crateDir + '/' + 'Cargo.toml');
     args.push('--target=wasm32-unknown-unknown');
+    args.push('-- -C overflow-checks=no');
 
     if (!options.debug) {
       args.push('--release');
